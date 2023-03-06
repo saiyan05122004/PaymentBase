@@ -1,0 +1,25 @@
+CREATE TABLE Category (
+    Id INT PRIMARY KEY,
+    Name NVARCHAR(50),
+    Icon NVARCHAR(50)
+);
+
+CREATE TABLE Users (
+    Id INT PRIMARY KEY,
+    FIO NVARCHAR(50),
+    Login NVARCHAR(50),
+    Password NVARCHAR(50),
+    PIN NVARCHAR(50)
+);
+
+CREATE TABLE Payment (
+    Id INT PRIMARY KEY,
+    UserId INT FOREIGN KEY REFERENCES Users(Id),
+    CategoryId INT FOREIGN KEY REFERENCES Category(Id),
+    Date DATE,
+    Name NVARCHAR(50),
+    Num INT,
+    Price DECIMAL(10, 2),
+    CONSTRAINT FK_Payment_Users FOREIGN KEY (UserId) REFERENCES Users(Id),
+    CONSTRAINT FK_Payment_Category FOREIGN KEY (CategoryId) REFERENCES Category(Id)
+);
